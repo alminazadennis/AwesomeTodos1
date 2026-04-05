@@ -37,14 +37,15 @@ router.put("/todos/:id", async (req, res) => {
     const collection = getCollection();
     const _id = new ObjectId(req.params.id);
     
-    /
+    
     const { todo, status } = req.body; 
 
+   
     if (typeof status !== "boolean") {
         return res.status(400).json({ mssg: "invalid status" });
     }
   
-    
+   
     const updatedTodo = await collection.updateOne(
         { _id }, 
         { $set: { todo, status: !status } } 
