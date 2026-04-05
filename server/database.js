@@ -1,18 +1,23 @@
 const { MongoClient } = require("mongodb");
 require('dotenv').config();
 
-const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017";
 
 let client;
 
 const connectToMongoDB = async () => {
     if (!client) {
         try {
-            // REMOVED: { useUnifiedTopology: true }
-            client = await MongoClient.connect(uri); 
-            console.log("Connected to Local MongoDB successfully!");
+            
+            client = new MongoClient(uri); 
+            
+      
+            await client.connect();
+            
+            console.log("Connected to MongoDB successfully!");
         } catch (error) {
             console.log("Database connection error:", error);
+          
+            throw error; 
         }
     }
     return client;
