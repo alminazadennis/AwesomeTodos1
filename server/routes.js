@@ -3,14 +3,14 @@ const router = express.Router();
 const { getCollection } = require("./models/index");
 const { ObjectId } = require("mongodb");
 
-// GET /api/todos - Retrieve all todos
+// GET /todos
 router.get("/todos", async (req, res) => {
     const collection = getCollection();
     const todos = await collection.find({}).toArray();
     res.status(200).json(todos);
 });
 
-// POST /api/todos - Create a new todo
+// POST /todos
     router.post("/todos", async (req, res) => {
     const collection = getCollection();
     let { todo } = req.body;
@@ -22,7 +22,7 @@ router.get("/todos", async (req, res) => {
     res.status(201).json({ todo, status: false, _id: newTodo.insertedId });
   })
 
-// DELETE /api/todos/:id - Delete a specific todo
+// DELETE /todos
 router.delete("/todos/:id", async (req, res) => {
     const collection = getCollection();
     const _id = new ObjectId(req.params.id);
@@ -31,22 +31,20 @@ router.delete("/todos/:id", async (req, res) => {
     res.status(200).json(deletedTodo);
 });
 
-// 
-// PUT /todos/:id
+
 // PUT /todos/:id
 router.put("/todos/:id", async (req, res) => {
     const collection = getCollection();
     const _id = new ObjectId(req.params.id);
     
-    // Extract both todo text and status from the request body
+    /
     const { todo, status } = req.body; 
 
-    // Validation check for status type
     if (typeof status !== "boolean") {
         return res.status(400).json({ mssg: "invalid status" });
     }
   
-    // Updates the text and flips the status in one go
+    
     const updatedTodo = await collection.updateOne(
         { _id }, 
         { $set: { todo, status: !status } } 
