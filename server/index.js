@@ -2,7 +2,7 @@
 
 
 const express = require("express");
-const cors = requir("cors");
+const cors = requier("cors");
 const { connectToMongoDB } = require("./database");
 const router = require("./routes");
 
@@ -16,9 +16,11 @@ const port = 5000;
 async function startServer() {
   try {
     await connectToMongoDB(); 
-    app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
-    });
+   const PORT = process.env.PORT || 5000; 
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
   } catch (err) {
     console.error("Failed to start server:", err);
   }
