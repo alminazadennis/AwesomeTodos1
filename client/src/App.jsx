@@ -2,6 +2,8 @@ import Todo from "./Todo";
 import { useEffect, useState } from "react";
 import "./styles.css";
 
+const API_BASE_URL = "https://awesometodos1-api.onrender.com";
+
 
 
 export default function App() {
@@ -10,7 +12,7 @@ export default function App() {
   const createNewTodo = async (e) => {
     e.preventDefault();
     if (content.length > 3) {
-      const res = await fetch("/api/todos", {
+      const res = await fetch(`${API_BASE_URL}/api/todos`,{
         method: "POST",
         body: JSON.stringify({ todo: content }),  
         headers: {
@@ -26,7 +28,7 @@ export default function App() {
 
   useEffect(() => {
     const getTodos = async () => {
-      const res = await fetch("/api/todos");
+      const res = await fetch(`${API_BASE_URL}/api/todos`);
       const todos = await res.json();
 
       setTodos(todos);

@@ -1,6 +1,7 @@
+const API_BASE_URL = "https://awesometodos1-api.onrender.com";
 export default function Todo(props) {
    const updateTodo = async (todoId, todoStatus) => {
-        const res = await fetch(`/api/todos/${todoId}`, {
+        const res = await fetch(`${API_BASE_URL}/api/todos`, {
             method: "PUT",
             body: JSON.stringify({ status: todoStatus }),
             headers: {
@@ -22,7 +23,7 @@ export default function Todo(props) {
         }
       };
       const deleteTodo = async (todoId) => {
-        const res = await fetch(`/api/todos/${todoId}`, {
+        const res = await fetch(`${API_BASE_URL}/api/todos`, {
             method: "DELETE"
         });
         const json = await res.json();
