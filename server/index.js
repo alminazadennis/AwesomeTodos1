@@ -1,4 +1,8 @@
+
+
+
 const express = require("express");
+const cors = requir("cors");
 const { connectToMongoDB } = require("./database");
 const router = require("./routes");
 
