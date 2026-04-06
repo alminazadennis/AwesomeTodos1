@@ -2,7 +2,7 @@ import Todo from "./Todo";
 import { useEffect, useState } from "react";
 import "./styles.css";
 
-const API_BASE_URL = "https://awesometodos1-api.onrender.com";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
 
 
