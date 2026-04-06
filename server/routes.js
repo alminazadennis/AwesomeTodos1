@@ -15,7 +15,7 @@ router.get("/todos", async (req, res) => {
     const collection = getCollection();
     let { todo } = req.body;
 
-    todo = JSON.stringify(todo);
+   
   
     const newTodo = await collection.insertOne({ todo, status: false });
   
@@ -48,7 +48,7 @@ router.put("/todos/:id", async (req, res) => {
    
     const updatedTodo = await collection.updateOne(
         { _id }, 
-        { $set: { todo, status: !status } } 
+        { $set: { status: !status } } 
     );
     
     res.status(200).json(updatedTodo);
